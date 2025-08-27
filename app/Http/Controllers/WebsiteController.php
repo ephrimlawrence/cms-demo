@@ -8,6 +8,8 @@ class WebsiteController extends Controller
 {
     public function index()
     {
-        return view('websites.index');
+        return view('websites.index', [
+            'websites' => auth()->user()->websites(),
+        ]);
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->jsonb('config')->nullable();
-            $table->dateTimeTz('published_at', precision: 0);
+            $table->dateTimeTz('published_at', precision: 0)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
