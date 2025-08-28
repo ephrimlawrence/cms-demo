@@ -36,7 +36,7 @@
                     <ul class="navbar-nav me-auto">
                         <!-- TODO: add authenticated user check -->
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route("websites.index") }}">Websites</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route("website.index") }}">Websites</a>
                         </li>
                     </ul>
 

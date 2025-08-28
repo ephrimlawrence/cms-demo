@@ -8,7 +8,7 @@
                     <div class="card-header">New Website</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('websites.create') }}">
+                        <form method="POST" action="{{ route('website.create') }}">
                             @csrf
 
                             <div class="row mb-3">
