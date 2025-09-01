@@ -44,7 +44,8 @@ class WebsiteController extends Controller
 
     public function edit($id, Request $request)
     {
-        $website = auth()->user()->websites()->findOrFail($id);
+        $config = WebsiteConfig::firstOrNew(['website_id' => $id])
+            ->load('website');
 
         if ($request->isMethod('post')) {
             $request->validate([
@@ -104,17 +105,17 @@ class WebsiteController extends Controller
                     [
                         "title" => $request->input('plan1_title'),
                         "price" => $request->input('plan1_price'),
-                        "features" => array_map('trim', explode("\n", $request->input('plan1_features'))),
+                        "features" => array_map('trim', explode(",", $request->input('plan1_features'))),
                     ],
                     [
                         "title" => $request->input('plan2_title'),
                         "price" => $request->input('plan2_price'),
-                        "features" => array_map('trim', explode("\n", $request->input('plan2_features'))),
+                        "features" => array_map('trim', explode(",", $request->input('plan2_features'))),
                     ],
                     [
                         "title" => $request->input('plan3_title'),
                         "price" => $request->input('plan3_price'),
-                        "features" => array_map('trim', explode("\n", $request->input('plan3_features'))),
+                        "features" => array_map('trim', explode(",", $request->input('plan3_features'))),
                     ],
                 ],
                 "testimonials" => [
@@ -136,7 +137,6 @@ class WebsiteController extends Controller
                 ],
             ];
 
-            $config = WebsiteConfig::firstOrNew(['website_id' => $website->id]);
             $config->config = json_encode($customization);
             $config->save();
 
@@ -145,7 +145,8 @@ class WebsiteController extends Controller
 
 
         return view('websites.edit', [
-            'website' => $website,
+            'config' => $config,
+            'data' => $config->config,
         ]);
     }
 }

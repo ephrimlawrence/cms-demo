@@ -13,4 +13,14 @@ class WebsiteConfig extends Model
         'config',
         'revisions',
     ];
+
+    protected $casts = [
+        'config' => 'array',
+        'revisions' => 'array',
+    ];
+
+    public function website()
+    {
+        return $this->belongsTo(Website::class);
+    }
 }
