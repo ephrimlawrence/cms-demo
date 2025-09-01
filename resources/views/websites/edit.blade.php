@@ -11,28 +11,10 @@
 
                     <div class="row">
                         <div class="col">
-
-                            <label for="name" class="col-form-label text-md-end">Site Name</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text"
-                                    class="form-control @error('name') is-invalid @enderror" name="name"
-                                    value="{{ old('name', $website->name) }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
                             <label for="hero_title" class="col-form-label">Hero Title</label>
                             <input id="hero_title" type="text"
                                 class="form-control @error('hero_title') is-invalid @enderror" name="hero_title"
-                                value="{{ old('hero_title', $website->hero_title) }}" required autocomplete="hero_title">
+                                value="{{ old('hero_title', $website->hero_title) }}" autocomplete="hero_title">
                             @error('hero_title')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -43,7 +25,7 @@
                             <label for="subtitle" class="col-form-label">Subtitle</label>
                             <input id="subtitle" type="text"
                                 class="form-control @error('subtitle') is-invalid @enderror" name="subtitle"
-                                value="{{ old('subtitle', $website->subtitle) }}" required autocomplete="subtitle">
+                                value="{{ old('subtitle', $website->subtitle) }}" autocomplete="subtitle">
                             @error('subtitle')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -56,9 +38,10 @@
                         <legend>Features</legend>
                         <hr>
                         <div class="col">
-                            <label for="summary" class="col-form-label">Summary</label>
-                            <textarea id="summary" class="form-control @error('summary') is-invalid @enderror" name="summary" required>{{ old('summary', $website->summary) }}</textarea>
-                            @error('summary')
+                            <label for="features_summary" class="col-form-label">Summary</label>
+                            <textarea id="features_summary" class="form-control @error('features_summary') is-invalid @enderror"
+                                name="features_summary">{{ old('summary', $website->summary) }}</textarea>
+                            @error('features_summary')
                                 <span class="invalid-feedback" role="alert"></span>
                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -70,7 +53,7 @@
                                 <label for="feature1_title" class="col-form-label">Feature 1 Title</label>
                                 <input id="feature1_title" type="text"
                                     class="form-control @error('feature1_title') is-invalid @enderror" name="feature1_title"
-                                    value="{{ old('feature1_title', $website->feature1_title) }}" required
+                                    value="{{ old('feature1_title', $website->feature1_title) }}"
                                     autocomplete="feature1_title">
                                 @error('feature1_title')
                                     <span class="invalid-feedback" role="alert">
@@ -82,7 +65,7 @@
                                 <label for="feature1_description" class="col-form-label">Feature 1
                                     Description</label>
                                 <textarea id="feature1_description" class="form-control @error('feature1_description') is-invalid @enderror"
-                                    name="feature1_description" required>{{ old('feature1_description', $website->feature1_description) }}</textarea>
+                                    name="feature1_description">{{ old('feature1_description', $website->feature1_description) }}</textarea>
                                 @error('feature1_description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -96,7 +79,7 @@
                                 <label for="feature2_title" class="col-form-label">Feature 2 Title</label>
                                 <input id="feature2_title" type="text"
                                     class="form-control @error('feature2_title') is-invalid @enderror" name="feature2_title"
-                                    value="{{ old('feature2_title', $website->feature2_title) }}" required
+                                    value="{{ old('feature2_title', $website->feature2_title) }}"
                                     autocomplete="feature2_title">
                                 @error('feature2_title')
                                     <span class="invalid-feedback" role="alert">
@@ -109,7 +92,7 @@
                                 <label for="feature2_description" class="col-form-label">Feature 2
                                     Description</label>
                                 <textarea id="feature2_description" class="form-control @error('feature2_description') is-invalid @enderror"
-                                    name="feature2_description" required>{{ old('feature2_description', $website->feature2_description) }}</textarea>
+                                    name="feature2_description">{{ old('feature2_description', $website->feature2_description) }}</textarea>
                                 @error('feature2_description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -123,7 +106,7 @@
                                 <label for="feature3_title" class="col-form-label">Feature 3 Title</label>
                                 <input id="feature3_title" type="text"
                                     class="form-control @error('feature3_title') is-invalid @enderror" name="feature3_title"
-                                    value="{{ old('feature3_title', $website->feature3_title) }}" required
+                                    value="{{ old('feature3_title', $website->feature3_title) }}"
                                     autocomplete="feature3_title">
                                 @error('feature3_title')
                                     <span class="invalid-feedback" role="alert">
@@ -136,7 +119,7 @@
                                 <label for="feature3_description" class="col-form-label">Feature 3
                                     Description</label>
                                 <textarea id="feature3_description" class="form-control @error('feature3_description') is-invalid @enderror"
-                                    name="feature3_description" required>{{ old('feature3_description', $website->feature3_description) }}</textarea>
+                                    name="feature3_description">{{ old('feature3_description', $website->feature3_description) }}</textarea>
                                 @error('feature3_description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -152,9 +135,9 @@
                                 <div class="col">
                                     <label for="plan1_title" class="col-form-label">Plan 1 Title</label>
                                     <input id="plan1_title" type="text"
-                                        class="form-control @error('plan1_title') is-invalid @enderror"
-                                        name="plan1_title" value="{{ old('plan1_title', $website->plan1_title) }}"
-                                        required autocomplete="plan1_title">
+                                        class="form-control @error('plan1_title') is-invalid @enderror" name="plan1_title"
+                                        value="{{ old('plan1_title', $website->plan1_title) }}"
+                                        autocomplete="plan1_title">
                                     @error('plan1_title')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -163,10 +146,10 @@
                                 </div>
                                 <div class="col">
                                     <label for="plan1_price" class="col-form-label">Plan 1 Price</label>
-                                    <input id="plan1_price" type="text"
+                                    <input id="plan1_price" type="number"
                                         class="form-control @error('plan1_price') is-invalid @enderror"
                                         name="plan1_price" value="{{ old('plan1_price', $website->plan1_price) }}"
-                                        required autocomplete="plan1_price">
+                                     autocomplete="plan1_price">
                                     @error('plan1_price')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -178,7 +161,7 @@
                                         separated)</label>
 
                                     <textarea id="plan1_features" class="form-control @error('plan1_features') is-invalid @enderror"
-                                        name="plan1_features" required>{{ old('plan1_features', $website->plan1_features) }}</textarea>
+                                        name="plan1_features">{{ old('plan1_features', $website->plan1_features) }}</textarea>
 
                                     @error('plan1_features')
                                         <span class="invalid-feedback" role="alert">
@@ -193,7 +176,7 @@
                                     <input id="plan2_title" type="text"
                                         class="form-control @error('plan2_title') is-invalid @enderror"
                                         name="plan2_title" value="{{ old('plan2_title', $website->plan2_title) }}"
-                                        required autocomplete="plan2_title">
+                                     autocomplete="plan2_title">
                                     @error('plan2_title')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -202,10 +185,10 @@
                                 </div>
                                 <div class="col">
                                     <label for="plan2_price" class="col-form-label">Plan 2 Price</label>
-                                    <input id="plan2_price" type="text"
+                                    <input id="plan2_price" type="number"
                                         class="form-control @error('plan2_price') is-invalid @enderror"
                                         name="plan2_price" value="{{ old('plan2_price', $website->plan2_price) }}"
-                                        required autocomplete="plan2_price">
+                                     autocomplete="plan2_price">
                                     @error('plan2_price')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -216,7 +199,7 @@
                                     <label for="plan2_features" class="col-form-label">Plan 2 Features (comma
                                         separated)</label>
                                     <textarea id="plan2_features" class="form-control @error('plan2_features') is-invalid @enderror"
-                                        name="plan2_features" required>{{ old('plan2_features', $website->plan2_features) }}</textarea>
+                                        name="plan2_features">{{ old('plan2_features', $website->plan2_features) }}</textarea>
                                     @error('plan2_features')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -232,7 +215,7 @@
                                     <input id="plan3_title" type="text"
                                         class="form-control @error('plan3_title') is-invalid @enderror"
                                         name="plan3_title" value="{{ old('plan3_title', $website->plan3_title) }}"
-                                        required autocomplete="plan3_title">
+                                     autocomplete="plan3_title">
                                     @error('plan3_title')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -241,10 +224,10 @@
                                 </div>
                                 <div class="col">
                                     <label for="plan3_price" class="col-form-label">Plan 3 Price</label>
-                                    <input id="plan3_price" type="text"
+                                    <input id="plan3_price" type="number"
                                         class="form-control @error('plan3_price') is-invalid @enderror"
                                         name="plan3_price" value="{{ old('plan3_price', $website->plan3_price) }}"
-                                        required autocomplete="plan3_price">
+                                     autocomplete="plan3_price">
                                     @error('plan3_price')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -255,7 +238,7 @@
                                     <label for="plan3_features" class="col-form-label">Plan 3 Features (comma
                                         separated)</label>
                                     <textarea id="plan3_features" class="form-control @error('plan3_features') is-invalid @enderror"
-                                        name="plan3_features" required>{{ old('plan3_features', $website->plan3_features) }}</textarea>
+                                        name="plan3_features">{{ old('plan3_features', $website->plan3_features) }}</textarea>
                                     @error('plan3_features')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -276,7 +259,7 @@
                                     <input id="testimonial1_author" type="text"
                                         class="form-control @error('testimonial1_author') is-invalid @enderror"
                                         name="testimonial1_author"
-                                        value="{{ old('testimonial1_author', $website->testimonial1_author) }}" required
+                                        value="{{ old('testimonial1_author', $website->testimonial1_author) }}"
                                         autocomplete="testimonial1_author">
                                     @error('testimonial1_author')
                                         <span class="invalid-feedback" role="alert">
@@ -287,7 +270,7 @@
                                 <div class="col">
                                     <label for="testimonial1_text" class="col-form-label">Testimonial 1 Text</label>
                                     <textarea id="testimonial1_text" class="form-control @error('testimonial1_text') is-invalid @enderror"
-                                        name="testimonial1_text" required>{{ old('testimonial1_text', $website->testimonial1_text) }}</textarea>
+                                        name="testimonial1_text">{{ old('testimonial1_text', $website->testimonial1_text) }}</textarea>
                                     @error('testimonial1_text')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -314,7 +297,7 @@
                                     <input id="testimonial2_author" type="text"
                                         class="form-control @error('testimonial2_author') is-invalid @enderror"
                                         name="testimonial2_author"
-                                        value="{{ old('testimonial2_author', $website->testimonial2_author) }}" required
+                                        value="{{ old('testimonial2_author', $website->testimonial2_author) }}"
                                         autocomplete="testimonial2_author">
                                     @error('testimonial2_author')
                                         <span class="invalid-feedback" role="alert">
@@ -325,7 +308,7 @@
                                 <div class="col">
                                     <label for="testimonial2_text" class="col-form-label">Testimonial 2 Text</label>
                                     <textarea id="testimonial2_text" class="form-control @error('testimonial2_text') is-invalid @enderror"
-                                        name="testimonial2_text" required>{{ old('testimonial2_text', $website->testimonial2_text) }}</textarea>
+                                        name="testimonial2_text">{{ old('testimonial2_text', $website->testimonial2_text) }}</textarea>
                                     @error('testimonial2_text')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -352,7 +335,7 @@
                                     <input id="testimonial3_author" type="text"
                                         class="form-control @error('testimonial3_author') is-invalid @enderror"
                                         name="testimonial3_author"
-                                        value="{{ old('testimonial3_author', $website->testimonial3_author) }}" required
+                                        value="{{ old('testimonial3_author', $website->testimonial3_author) }}"
                                         autocomplete="testimonial3_author">
                                     @error('testimonial3_author')
                                         <span class="invalid-feedback" role="alert">
@@ -363,7 +346,7 @@
                                 <div class="col">
                                     <label for="testimonial3_text" class="col-form-label">Testimonial 3 Text</label>
                                     <textarea id="testimonial3_text" class="form-control @error('testimonial3_text') is-invalid @enderror"
-                                        name="testimonial3_text" required>{{ old('testimonial3_text', $website->testimonial3_text) }}</textarea>
+                                        name="testimonial3_text">{{ old('testimonial3_text', $website->testimonial3_text) }}</textarea>
                                     @error('testimonial3_text')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
