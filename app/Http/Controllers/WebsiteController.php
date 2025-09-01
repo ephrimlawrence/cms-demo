@@ -184,8 +184,12 @@ class WebsiteController extends Controller
                 ],
             ];
 
-
-            $config->update(["config" => json_encode($customization)]);
+            $tmp = $config->revisions;
+            $tmp[] = $customization;
+            $config->update([
+                "config" => json_encode($customization),
+                "revisions" => $tmp,
+            ]);
             $config->website->update(['config' => json_encode($customization)]);
 
             return redirect()->route('website.index');
