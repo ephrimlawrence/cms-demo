@@ -10,12 +10,6 @@ use Illuminate\Support\Str;
 
 class WebsiteController extends Controller
 {
-    public function index()
-    {
-        return view('websites.index', [
-            'websites' => auth()->user()->websites()->get(),
-        ]);
-    }
 
     public function new()
     {
@@ -192,7 +186,7 @@ class WebsiteController extends Controller
             ]);
             $config->website->update(['config' => json_encode($customization)]);
 
-            return redirect()->route('website.index');
+            return redirect()->route('home');
         }
 
         return view('websites.edit', [

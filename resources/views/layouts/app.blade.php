@@ -36,11 +36,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <!-- TODO: add authenticated user check -->
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page"
-                                href="{{ route('website.index') }}">Websites</a>
-                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
