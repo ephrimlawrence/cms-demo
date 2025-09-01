@@ -23,8 +23,11 @@
                                     <a href="{{ route('website.view', ['id' => $website->id]) }}" target="__blank"
                                         class="btn btn-primary">View</a>
 
-                                    <a href="{{ route('website.edit', ['id' => $website->id]) }}" target="__blank"
+                                    <a href="{{ route('website.edit', ['id' => $website->id]) }}"
                                         class="btn btn-secondary">Edit</a>
+
+                                    <a href="{{ route('analytics.index', ['id' => $website->id]) }}"
+                                        class="btn btn-secondary">Analytics</a>
                                 </div>
                             </div>
                         </div>
