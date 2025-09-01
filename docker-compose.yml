@@ -12,6 +12,7 @@ services:
       - DB_DATABASE=wowlogbook
       - DB_USERNAME=wowuser
       - DB_PASSWORD=wowpass
+      - APP_ENV=local
     depends_on:
       - db
 
