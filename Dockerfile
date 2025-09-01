@@ -24,9 +24,9 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 # Set permissions for Laravel
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-RUN php artisan storage:link
-RUN php artisan migrate
+RUN php /var/www/html/artisan storage:link
+RUN php /var/www/html/artisan migrate --force
 
 EXPOSE 8000
 
-CMD php artisan serve --host=0.0.0.0 --port=8000
+CMD php artisan serve --port=8000
