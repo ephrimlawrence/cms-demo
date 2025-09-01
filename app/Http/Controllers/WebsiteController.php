@@ -39,6 +39,7 @@ class WebsiteController extends Controller
 
         return view('websites.template', [
             'website' => $website,
+            'config' => json_decode($website->config),
         ]);
     }
 
@@ -139,7 +140,9 @@ class WebsiteController extends Controller
                     ],
                 ],
             ];
+
             $config->update(["config" => json_encode($customization)]);
+            $config->website->update(['config' => json_encode($customization)]);
 
             return redirect()->route('website.index');
         }

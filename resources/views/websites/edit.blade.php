@@ -22,11 +22,11 @@
                             @enderror
                         </div>
                         <div class="col">
-                            <label for="subtitle" class="col-form-label">Subtitle</label>
-                            <input id="subtitle" type="text"
-                                class="form-control @error('subtitle') is-invalid @enderror" name="subtitle"
-                                value="{{ old('subtitle', $data->hero->subtitle) }}" autocomplete="subtitle">
-                            @error('subtitle')
+                            <label for="hero_subtitle" class="col-form-label">Subtitle</label>
+                            <input id="hero_subtitle" type="text"
+                                class="form-control @error('hero_subtitle') is-invalid @enderror" name="hero_subtitle"
+                                value="{{ old('hero_subtitle', $data->hero->subtitle) }}" autocomplete="hero_subtitle">
+                            @error('hero_subtitle')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
