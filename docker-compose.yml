@@ -16,13 +16,13 @@ services:
       - db
 
   db:
-    image: mysql:8.0
+    image: mariadb:11.3
     restart: always
     environment:
-      MYSQL_DATABASE: wowlogbook
-      MYSQL_USER: wowuser
-      MYSQL_PASSWORD: wowpass
-      MYSQL_ROOT_PASSWORD: rootpass
+      MARIADB_DATABASE: wowlogbook
+      MARIADB_USER: wowuser
+      MARIADB_PASSWORD: wowpass
+      MARIADB_ROOT_PASSWORD: rootpass
     ports:
       - "3306:3306"
     volumes:
