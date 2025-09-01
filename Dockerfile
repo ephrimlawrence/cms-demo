@@ -26,6 +26,7 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 RUN php /app/artisan storage:link
 RUN php /app/artisan migrate --force
+RUN php /app/artisan key:generate
 
 EXPOSE 8000
 
