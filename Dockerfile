@@ -25,6 +25,7 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 RUN php artisan storage:link
+RUN php artisan migrate
 
 EXPOSE 8000
 
