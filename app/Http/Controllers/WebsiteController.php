@@ -40,4 +40,13 @@ class WebsiteController extends Controller
             'website' => $website,
         ]);
     }
+
+    public function edit($id)
+    {
+        $website = auth()->user()->websites()->findOrFail($id);
+
+        return view('websites.edit', [
+            'website' => $website,
+        ]);
+    }
 }

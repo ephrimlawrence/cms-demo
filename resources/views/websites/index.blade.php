@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="col justify-content-between d-flex">
                     <span>My Websites</span>
-                    <a href="{{ route("website.new") }}" class="btn btn-primary">Create New</a>
+                    <a href="{{ route('website.new') }}" class="btn btn-primary">Create New</a>
                 </div>
             </div>
 
@@ -20,9 +20,11 @@
                                     <p class="card-text">With supporting text below as a natural lead-in to additional
                                         content.</p>
 
-                                        <a href="{{ route("website.view", ["id" => $website->id]) }}" target="__blank" class="btn btn-primary">View</a>
+                                    <a href="{{ route('website.view', ['id' => $website->id]) }}" target="__blank"
+                                        class="btn btn-primary">View</a>
 
-                                    <a href="#" target="__blank" class="btn btn-secondary">Edit</a>
+                                    <a href="{{ route('website.edit', ['id' => $website->id]) }}" target="__blank"
+                                        class="btn btn-secondary">Edit</a>
                                 </div>
                             </div>
                         </div>
