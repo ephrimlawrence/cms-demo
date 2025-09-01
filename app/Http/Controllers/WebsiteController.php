@@ -28,7 +28,7 @@ class WebsiteController extends Controller
             'slug' => Str::of($request->input('name'))->slug('-')
         ]);
 
-        return redirect()->route('website.index');
+        return redirect()->route('home');
     }
 
     public function view($id)

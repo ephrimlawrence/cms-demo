@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/sites/{slug}', [App\Http\Controllers\WebsiteController::class, 'browseWebsite'])->name('website.browse');
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/analytics/{id}', [AnalyticsController::class, 'index'])->name('analytics.index');
 
     Route::group(['middleware' => 'auth', 'prefix' => 'websites'], function () {
-        Route::get('/', [WebsiteController::class, 'index'])->name('website.index');
         Route::get('/view/{id}', [WebsiteController::class, 'view'])->name('website.view');
         Route::get('/new', [WebsiteController::class, 'new'])->name('website.new');
         Route::post('/create', [WebsiteController::class, 'create'])->name('website.create');
