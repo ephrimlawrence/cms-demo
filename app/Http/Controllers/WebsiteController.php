@@ -47,7 +47,8 @@ class WebsiteController extends Controller
         ]);
     }
 
-    public function browseWebsite($slug){
+    public function browseWebsite($slug)
+    {
         $website = Website::where('slug', $slug)->firstOrFail();
 
         // A​ Track page views for each client's page  - visitor IP, timestamp, user agent
@@ -103,7 +104,27 @@ class WebsiteController extends Controller
                 'testimonial3_text' => 'string',
             ]);
 
-            // todo: implement testimonials images upload
+            $testimonial1ImageUrl = null;
+            $testimonial2ImageUrl = null;
+            $testimonial3ImageUrl = null;
+
+            if ($request->hasFile('testimonial1_image')) {
+                $image = $request->file('testimonial1_image');
+                $path = $image->store('testimonials', 'public');
+                $testimonial1ImageUrl = asset('storage/' . $path);
+            }
+
+            if ($request->hasFile('testimonial2_image')) {
+                $image = $request->file('testimonial2_image');
+                $path = $image->store('testimonials', 'public');
+                $testimonial2ImageUrl = asset('storage/' . $path);
+            }
+            if ($request->hasFile('testimonial3_image')) {
+                $image = $request->file('testimonial3_image');
+                $path = $image->store('testimonials', 'public');
+                $testimonial3ImageUrl = asset('storage/' . $path);
+            }
+
             $customization = [
                 "hero" => [
                     "title" => $request->input('hero_title'),
@@ -147,20 +168,22 @@ class WebsiteController extends Controller
                     [
                         "author" => $request->input('testimonial1_author'),
                         "text" => $request->input('testimonial1_text'),
-                        "image" => null,
+                        "image" => $testimonial1ImageUrl
+
                     ],
                     [
                         "author" => $request->input('testimonial2_author'),
                         "text" => $request->input('testimonial2_text'),
-                        "image" => null,
+                        "image" => $testimonial2ImageUrl,
                     ],
                     [
                         "author" => $request->input('testimonial3_author'),
                         "text" => $request->input('testimonial3_text'),
-                        "image" => null,
+                        "image" => $testimonial3ImageUrl,
                     ],
                 ],
             ];
+
 
             $config->update(["config" => json_encode($customization)]);
             $config->website->update(['config' => json_encode($customization)]);

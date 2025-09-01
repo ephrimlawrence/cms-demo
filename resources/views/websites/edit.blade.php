@@ -6,7 +6,7 @@
             <div class="card-header">{{ $config->website->name }}</div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route('website.edit', ['id' => $config->website_id]) }}">
+                <form method="POST" action="{{ route('website.edit', ['id' => $config->website_id]) }}"  enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">
