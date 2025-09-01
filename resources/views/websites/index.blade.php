@@ -20,8 +20,11 @@
                                     <p class="card-text">With supporting text below as a natural lead-in to additional
                                         content.</p>
 
+                                    <a href="{{ route('website.browse', ['slug' => $website->slug]) }}" target="__blank"
+                                        class="btn btn-primary">Browse Live</a>
+
                                     <a href="{{ route('website.view', ['id' => $website->id]) }}" target="__blank"
-                                        class="btn btn-primary">View</a>
+                                        class="btn btn-primary">Preview</a>
 
                                     <a href="{{ route('website.edit', ['id' => $website->id]) }}"
                                         class="btn btn-secondary">Edit</a>

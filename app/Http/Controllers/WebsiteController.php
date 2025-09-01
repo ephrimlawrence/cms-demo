@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Analytics;
+use App\Models\Website;
 use App\Models\WebsiteConfig;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class WebsiteController extends Controller
 {
@@ -29,6 +31,7 @@ class WebsiteController extends Controller
         auth()->user()->websites()->create([
             'name' => $request->input('name'),
             'config' => '{}',
+            'slug' => Str::of($request->input('name'))->slug('-')
         ]);
 
         return redirect()->route('website.index');
@@ -45,18 +48,18 @@ class WebsiteController extends Controller
     }
 
     public function browseWebsite($slug){
-        $website = WebsiteConfig::where('slug', $slug)->firstOrFail();
+        $website = Website::where('slug', $slug)->firstOrFail();
 
         // A​ Track page views for each client's page  - visitor IP, timestamp, user agent
         Analytics::create([
-            'website_id' => $website->website_id,
+            'website_id' => $website->id,
             'visitor_ip' => request()->ip(),
             'timestamp' => now(),
             'user_agent' => request()->header('User-Agent'),
         ]);
 
         return view('websites.template', [
-            'website' => $website->website,
+            'website' => $website,
             'config' => json_decode($website->config),
         ]);
     }

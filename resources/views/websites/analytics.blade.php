@@ -7,11 +7,14 @@
 @section('content')
     <div class="container">
         <div class="card">
-            <div class="card-header"><span>Analytics</span> </div>
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>Analytics</span>
+                <button id="exportCsvBtn" class="btn btn-sm btn-primary">Export CSV</button>
+            </div>
             <div class="card-body">
                 <canvas id="analyticsChart" width="400" height="150"></canvas>
 
-                <table class="table">
+                <table class="table" id="analyticsTable">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
@@ -80,5 +83,31 @@
             document.getElementById('analyticsChart'),
             config
         );
+
+        // Export table to CSV
+        document.getElementById('exportCsvBtn').addEventListener('click', function () {
+            const table = document.getElementById('analyticsTable');
+            let csv = [];
+            for (let row of table.rows) {
+                let rowData = [];
+                for (let cell of row.cells) {
+                    // Escape quotes in cell data
+                    let text = cell.innerText.replace(/"/g, '""');
+                    rowData.push('"' + text + '"');
+                }
+                csv.push(rowData.join(','));
+            }
+            const csvString = csv.join('\n');
+            const blob = new Blob([csvString], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'analytics.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        });
     </script>
 @endsection

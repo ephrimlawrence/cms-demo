@@ -10,5 +10,7 @@ class Website extends Model
         'name',
         'user_id',
         'config',
+        'slug',
+        'published_at',
     ];
 }
