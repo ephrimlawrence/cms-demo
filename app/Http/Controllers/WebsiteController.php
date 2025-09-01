@@ -44,8 +44,14 @@ class WebsiteController extends Controller
 
     public function edit($id, Request $request)
     {
-        $config = WebsiteConfig::firstOrNew(['website_id' => $id])
-            ->load('website');
+        $config = WebsiteConfig::where('website_id', $id)->first();
+        if ($config == null) {
+            $config = WebsiteConfig::create([
+                'website_id' => $id,
+                'config' => json_encode($this->configTemplate())
+            ]);
+            $config = WebsiteConfig::where('website_id', $id)->first()->load('website');
+        }
 
         if ($request->isMethod('post')) {
             $request->validate([
@@ -69,13 +75,10 @@ class WebsiteController extends Controller
                 'plan3_features' => 'string',
                 'testimonial1_author' => 'string',
                 'testimonial1_text' => 'string',
-                'testimonial1_image' => 'file|image|max:2048',
                 'testimonial2_author' => 'string',
                 'testimonial2_text' => 'string',
-                'testimonial2_image' => 'file|image|max:2048',
                 'testimonial3_author' => 'string',
                 'testimonial3_text' => 'string',
-                'testimonial3_image' => 'file|image|max:2048',
             ]);
 
             // todo: implement testimonials images upload
@@ -136,17 +139,75 @@ class WebsiteController extends Controller
                     ],
                 ],
             ];
-
-            $config->config = json_encode($customization);
-            $config->save();
+            $config->update(["config" => json_encode($customization)]);
 
             return redirect()->route('website.index');
         }
 
-
         return view('websites.edit', [
             'config' => $config,
-            'data' => $config->config,
+            'data' => json_decode($config->config),
         ]);
+    }
+
+    private function configTemplate()
+    {
+        return [
+            "hero" => [
+                "title" => 'Seamlessly Connect and Sync Your Data',
+                "subtitle" => 'CloudSync offers a robust platform for syncing data across all your devices, ensuring your information is always up-to-date and accessible.',
+            ],
+            "features" => [
+                "summary" => 'CloudSync provides a comprehensive suite of features designed to enhance your data management and accessibility.',
+                "items" => [
+                    [
+                        "title" => 'Secure Data Storage',
+                        "description" => "Benefit from our secure cloud infrastructure, ensuring your data is stored safely and reliably.",
+                    ],
+                    [
+                        "title" => 'End-to-End Encryption',
+                        "description" => 'Your data is protected with advanced encryption, safeguarding it from unauthorized access.',
+                    ],
+                    [
+                        "title" => 'Real-Time Synchronization',
+                        "description" => 'Experience seamless data synchronization across all your devices, keeping your information current. ',
+                    ]
+                ],
+            ],
+            "pricing_plans" => [
+                [
+                    "title" => 'Basic',
+                    "price" => '99',
+                    "features" => ['5GB Storage', 'Basic Support', 'Single Device Sync'],
+                ],
+                [
+                    "title" => 'Pro',
+                    "price" => '19.99',
+                    "features" => ['100GB Storage', 'Priority Support', 'Multi-Device Sync', 'Advanced Security'],
+                ],
+                [
+                    "title" => "Enterprise",
+                    "price" => "49.99",
+                    "features" => ["Unlimited Storage", "24/7 Support", "Unlimited Devices", "Advanced Security Features", "Dedicated Account Manager"]
+                ]
+            ],
+            "testimonials" => [
+                [
+                    "author" => 'Sophia Bennett, Marketing Manager',
+                    "text" => "CloudSync has revolutionized how I manage my data. It's reliable and easy to use.",
+                    "image" => "https://lh3.googleusercontent.com/aida-public/AB6AXuCklY9OYHmqfM3IBM9TIHbLqLFMYAfYBnJ5ou8QeFIUjS6DeqAq7QYCU-ArHKRVk-pp2SAfLd4qgLCw5sKdSvrZ57DvV_OjtbL3DMx1GGakb5YvzBn70Pcnkt6OlDWmEV3qYpfVh5CuDeHgNFosL3vZqsIvI0Wnc95CtqElp0TNmyyZMGdGtyyIm76zn-cSHTOF8dmNXSBFSxzvIX0KaYBeIMzCj-URXy-MLDzWwv80jDqzif3uIwoYyladAPu60Zi4BXMDt-EmVQY",
+                ],
+                [
+                    "author" => 'Ethan Carter, Software Engineer',
+                    "text" => 'The real-time sync feature is a game-changer. I can access my files from anywhere.',
+                    "image" => "https://lh3.googleusercontent.com/aida-public/AB6AXuAGXJ1PkU6Y_pPrKywHmgccheOQm7Rt349A9D_ZHo-fuj-R_rv0mq-2zlxcU8bjlW_-FSyG2Li1dVBvMjjESyA-BlLcmZr3ZP0DAeot2SVYFgpcSZ1jsMCKm2S1Hx4Ky7uv_KRCCTNFfLnAQdJOYCN9GGBipd60GYT9H2SShcYYIonPnZ27cBaK5Cq1attTCSblA5xs8Hs3tfKruNN-1EXxCrcLYZRbx7Q4_bGahx-c2WttnGDZYZeTh2LtqaXZvpdKYWFzUds5EAc",
+                ],
+                [
+                    "author" => 'Olivia Hayes, Freelance Designer',
+                    "text" => "I feel confident knowing my data is secure with CloudSync's encryption",
+                    "image" => "https://lh3.googleusercontent.com/aida-public/AB6AXuDUboH42soVc2tsIF5iAC5-29P0c_rF37aYIZTe1GWCCrA4FGT5YGpWtBiYfJRrKU-C34zJ4IxH29UUSYFAK3GdWxLPGqHIoIIBsfSjjOUZfdzQA5B9qf1tRf0rCfY-YyRZ08-aj3sYlCHqnAStYoVr3wODKB_8VwtHExaXqxcAAjpjnqioXzukXSrTp8zMcTLLNKsiZc3f_aTzIrKvatHccPJPbQLdnPH4ss84c2-yOZ-XeVjCaEyLrDmXh9OqQNCP5f5ItQBLPNk",
+                ],
+            ],
+        ];
     }
 }

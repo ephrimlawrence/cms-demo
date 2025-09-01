@@ -15,7 +15,6 @@ class WebsiteConfig extends Model
     ];
 
     protected $casts = [
-        'config' => 'array',
         'revisions' => 'array',
     ];
 

@@ -14,7 +14,7 @@
                             <label for="hero_title" class="col-form-label">Hero Title</label>
                             <input id="hero_title" type="text"
                                 class="form-control @error('hero_title') is-invalid @enderror" name="hero_title"
-                                value="{{ old('hero_title', $data['hero']['title']) }}" autocomplete="hero_title">
+                                value="{{ old('hero_title', $data->hero->title) }}" autocomplete="hero_title">
                             @error('hero_title')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -25,7 +25,7 @@
                             <label for="subtitle" class="col-form-label">Subtitle</label>
                             <input id="subtitle" type="text"
                                 class="form-control @error('subtitle') is-invalid @enderror" name="subtitle"
-                                value="{{ old('subtitle', $data['hero']['subtitle']) }}" autocomplete="subtitle">
+                                value="{{ old('subtitle', $data->hero->subtitle) }}" autocomplete="subtitle">
                             @error('subtitle')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -40,7 +40,7 @@
                         <div class="col">
                             <label for="features_summary" class="col-form-label">Summary</label>
                             <textarea id="features_summary" class="form-control @error('features_summary') is-invalid @enderror"
-                                name="features_summary">{{ old('summary', $data['features']['summary']) }}</textarea>
+                                name="features_summary">{{ old('summary', $data->features->summary) }}</textarea>
                             @error('features_summary')
                                 <span class="invalid-feedback" role="alert"></span>
                                 <strong>{{ $message }}</strong>
@@ -48,9 +48,9 @@
                             @enderror
                         </div>
 
-                        @foreach ($data['features']['items'] as $feature)
+                        @foreach ($data->features->items as $feature)
                             @php
-                                $count = $loop->count;
+                                $count = $loop->index + 1;
                                 $title_id = 'feature' . $count . '_title';
                                 $description_id = 'feature' . $count . '_description';
                             @endphp
@@ -61,7 +61,7 @@
                                         Title</label>
                                     <input id="{{ $title_id }}" type="text"
                                         class="form-control @error($title_id) is-invalid @enderror"
-                                        name="{{ $title_id }}" value="{{ old($title_id, $feature['title']) }}"
+                                        name="{{ $title_id }}" value="{{ old($title_id, $feature->title) }}"
                                         autocomplete="{{ $title_id }}">
                                     @error($title_id)
                                         <span class="invalid-feedback" role="alert">
@@ -74,7 +74,7 @@
                                     <label for="{{ $description_id }}" class="col-form-label">Feature {{ $count }}
                                         Description</label>
                                     <textarea id="{{ $description_id }}" class="form-control @error($description_id) is-invalid @enderror"
-                                        name="{{ $description_id }}">{{ old($description_id, $feature['description']) }}</textarea>
+                                        name="{{ $description_id }}">{{ old($description_id, $feature->description) }}</textarea>
                                     @error($description_id)
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -88,9 +88,9 @@
                     <fieldset>
                         <legend class="mt-3">Pricing Plans</legend>
                         <hr>
-                        @foreach ($data['pricing_plans'] as $plan)
+                        @foreach ($data->pricing_plans as $plan)
                             @php
-                                $count = $loop->count;
+                                $count = $loop->index + 1;
                                 $title_id = 'plan' . $count . '_title';
                                 $price_id = 'plan' . $count . '_price';
                                 $features_id = 'plan' . $count . '_features';
@@ -102,7 +102,7 @@
                                         Title</label>
                                     <input id="{{ $title_id }}" type="text"
                                         class="form-control @error($title_id) is-invalid @enderror"
-                                        name="{{ $title_id }}" value="{{ old($title_id, $plan['title']) }}"
+                                        name="{{ $title_id }}" value="{{ old($title_id, $plan->title) }}"
                                         autocomplete="{{ $title_id }}">
                                     @error($title_id)
                                         <span class="invalid-feedback" role="alert">
@@ -115,7 +115,7 @@
                                         Price</label>
                                     <input id="{{ $price_id }}" type="number"
                                         class="form-control @error($price_id) is-invalid @enderror"
-                                        name="{{ $price_id }}" value="{{ old($price_id, $plan['price']) }}"
+                                        name="{{ $price_id }}" value="{{ old($price_id, $plan->price) }}"
                                         autocomplete="plan1_price">
                                     @error($price_id)
                                         <span class="invalid-feedback" role="alert">
@@ -128,7 +128,7 @@
                                         Features (comma separated)</label>
 
                                     <textarea id="{{ $features_id }}" class="form-control @error($features_id) is-invalid @enderror"
-                                        name="{{ $features_id }}">{{ old($features_id, implode(',', $plan['features'])) }}</textarea>
+                                        name="{{ $features_id }}">{{ old($features_id, implode(',', $plan->features)) }}</textarea>
 
                                     @error($features_id)
                                         <span class="invalid-feedback" role="alert">
@@ -145,9 +145,9 @@
                         <legend class="mt-3">Testimonials</legend>
                         <hr>
 
-                        @foreach ($data['testimonials'] as $testimonial)
+                        @foreach ($data->testimonials as $testimonial)
                             @php
-                                $count = $loop->count;
+                                $count = $loop->index + 1;
                                 $author_id = 'testimonial' . $count . '_author';
                                 $text_id = 'testimonial' . $count . '_text';
                                 $image_id = 'testimonial' . $count . '_image';
@@ -158,7 +158,7 @@
                                         {{ $count }} Author</label>
                                     <input id="{{ $author_id }}" type="text"
                                         class="form-control @error($author_id) is-invalid @enderror"
-                                        name="{{ $author_id }}" value="{{ old($author_id, $testimonial['author']) }}"
+                                        name="{{ $author_id }}" value="{{ old($author_id, $testimonial->author) }}"
                                         autocomplete="{{ $author_id }}">
                                     @error($author_id)
                                         <span class="invalid-feedback" role="alert">
@@ -171,7 +171,7 @@
                                     <label for="{{ $text_id }}" class="col-form-label">Testimonial
                                         {{ $count }} Text</label>
                                     <textarea id="{{ $text_id }}" class="form-control @error($text_id) is-invalid @enderror"
-                                        name="{{ $text_id }}">{{ old($text_id, $testimonial['text']) }}</textarea>
+                                        name="{{ $text_id }}">{{ old($text_id, $testimonial->text) }}</textarea>
                                     @error($text_id)
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
